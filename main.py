@@ -1,4 +1,4 @@
-import pygame, constants, math
+import pygame, constants, math, serialuart
 import keyboard, mouse
 from pygame import gfxdraw
 from logic import collisions
@@ -83,6 +83,7 @@ def main():
 
     while running:
         running = listen(running)
+        serialuart.listen()
 
         if state == constants.TITLE_SCREEN:
             ctx.blit(images.menu,(0,0))
@@ -92,6 +93,8 @@ def main():
 
         elif state == constants.STAGE_ONE:
 
+            
+            
             if keyboard.controls['keySpace'] and ball.launching and ball.spd[1] == 0:
                 ball.spd[1] = -14
 

@@ -1,4 +1,4 @@
-import pygame, math, constants, copy, keyboard
+import pygame, math, constants, copy, keyboard, serialuart
 from pygame import gfxdraw
 from logic import collisions
 from logic.graphics import sortByX, sortByY
@@ -47,7 +47,7 @@ class Flipper(Rect):
         return coOrds
 
     def isActive(self):
-        if (self.name == "L" and keyboard.leftFlipper()) or (self.name == "R" and keyboard.rightFlipper()):
+        if (self.name == "L" and (keyboard.leftFlipper() or serialuart.leftFlipper())) or (self.name == "R" and (keyboard.rightFlipper() or serialuart.rightFlipper())):
             return True
         else:
             return False
