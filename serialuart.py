@@ -2,16 +2,16 @@ import pygame
 import serial
 pygame.init()
 
-uart = serial.Serial('COM3', 19200, timeout=1)
+#uart = serial.Serial('COM3', 19200, timeout=1)
 
 leftFlipperuart = False
 rightFlipperuart = False
 
 def listen():
-    #uartinput = 0xF0
+    uartinput = 0x0F
     global leftFlipperuart
     global rightFlipperuart
-    uartinput = uart.read()
+    #uartinput = uart.read()
     if uartinput == 0x00 :
         leftFlipperuart = False
         rightFlipperuart = False

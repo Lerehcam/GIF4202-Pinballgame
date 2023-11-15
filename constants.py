@@ -20,10 +20,10 @@ colors = {
 
 # FONTS
 muli = {
-    "15": pygame.font.Font("fonts/muli.ttf",15),
-    "20": pygame.font.Font("fonts/muli.ttf",20),
-    "30": pygame.font.Font("fonts/muli.ttf",30),
-    "70": pygame.font.Font("fonts/muli.ttf",70)
+    "15": pygame.font.Font("serialPinball/fonts/muli.ttf",15),
+    "20": pygame.font.Font("serialPinball/fonts/muli.ttf",20),
+    "30": pygame.font.Font("serialPinball/fonts/muli.ttf",30),
+    "70": pygame.font.Font("serialPinball/fonts/muli.ttf",70)
 }
 
 # ACCELERATION // 1.11m/s
