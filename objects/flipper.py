@@ -63,6 +63,9 @@ class Flipper(Rect):
             return self.activeAngle
         else:
             return self.angle
+        
+    def setActiveAngle(self, newAngle) :
+        self.activeAngle = newAngle
 
     def getHighestPoints(self):
         temp = copy.deepcopy(self.angleCoords)
@@ -70,7 +73,7 @@ class Flipper(Rect):
         return temp[0], temp[1]
 
     def draw(self, ctx):
-
+        self.activeAngleCoords = self.prepCoords(self.activeAngle)
         if self.isActive():
             gfxdraw.filled_polygon(ctx, self.activeAngleCoords, self.color)
             gfxdraw.aapolygon(ctx, self.activeAngleCoords, self.color)

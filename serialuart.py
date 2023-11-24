@@ -1,31 +1,44 @@
 import pygame
-import serial
+import serial, math, time
 pygame.init()
 
-uart = serial.Serial('COM3', 19200, timeout=1)
+testStandAlone = False;
+
+if  testStandAlone :
+    uart = serial.Serial('COM4', 19200, timeout=1)
+    uartinput = b'\x00'
+else :
+    uart = serial.Serial('COM3', 19200, timeout=0.0167)
+    uartinput = b'\x00'
 
 leftFlipperuart = False
 rightFlipperuart = False
 
 def listen():
-    #uartinput = 0x0F
+    global uartinput
+    if testStandAlone :
+        uart.flushInput()
+        time.sleep(0.2)
+        if uart.in_waiting > 0 :
+            uartinput = uart.read()
+        print(uartinput)
+    else :
+        uart.flushInput()
+        uartinput = uart.read()
     global leftFlipperuart
     global rightFlipperuart
-    uart.flushInput()
-    uartinput = uart.read()
-    print(uartinput)
-    if uartinput == b'\x00' :
-        leftFlipperuart = False
-        rightFlipperuart = False
-    elif uartinput == b'\x0f' :
-        leftFlipperuart = False
+    rightuartinput = uartinput[0] & 15
+    leftuartinput = (uartinput[0] >> 4) & 15
+    print([leftuartinput,rightuartinput])
+    if rightuartinput>0 :
         rightFlipperuart = True
-    elif uartinput == b'\xf0' :
-        leftFlipperuart = True
+    else :
         rightFlipperuart = False
-    elif uartinput == b'\xff' :
+    if leftuartinput > 0 :
         leftFlipperuart = True
-        rightFlipperuart = True
+    else :
+        leftFlipperuart = False
+    return [(5*math.pi/36)-(leftuartinput*(math.pi/54)),(31*math.pi/36)+(rightuartinput*(math.pi/54))]
 
 
 def leftFlipper():

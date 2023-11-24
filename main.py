@@ -83,7 +83,7 @@ def main():
 
     while running:
         running = listen(running)
-        serialuart.listen()
+        newAngles = serialuart.listen()
 
         if state == constants.TITLE_SCREEN:
             ctx.blit(images.menu,(0,0))
@@ -92,8 +92,9 @@ def main():
                 state = constants.STAGE_ONE
 
         elif state == constants.STAGE_ONE:
-
             
+            flippers[0].setActiveAngle(newAngles[0])
+            flippers[1].setActiveAngle(newAngles[1])
             
             if keyboard.controls['keySpace'] and ball.launching and ball.spd[1] == 0:
                 ball.spd[1] = -14
