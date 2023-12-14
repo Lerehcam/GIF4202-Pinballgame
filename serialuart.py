@@ -24,6 +24,7 @@ def listen():
         print(uartinput)
     else :
         uart.flushInput()
+        time.sleep(0.008)
         uartinput = uart.read()
     global leftFlipperuart
     global rightFlipperuart
